@@ -1,14 +1,11 @@
-# Real-Time Emotion Detection System
-
-![Emotion Detection](demo.gif)
+# Emotion Detection System
 
 ## Overview
 
-This project is a real-time emotion detection system using Python, OpenCV, and a pre-trained deep learning model. The system analyzes facial expressions captured through a webcam or video feed and identifies the predominant emotion displayed.
+This project is a emotion detection system using Python, OpenCV, and a pre-trained deep learning model. The system analyzes facial expressions captured through an image and identifies the predominant emotion displayed.
 
 ## Features
 
-- Real-time emotion detection using a webcam or video feed.
 - Supports multiple faces in a frame.
 - Pre-trained deep learning model for accurate emotion recognition.
 - Easy integration into existing projects.
