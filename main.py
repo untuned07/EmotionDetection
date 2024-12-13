@@ -1,7 +1,7 @@
-from tensorflow.keras.models import load_model
+from tensorflow.keras.models import load_model # type: ignore
 from time import sleep
-from keras.preprocessing.image import img_to_array
-from keras.preprocessing import image
+from tensorflow.keras.preprocessing.image import img_to_array # type: ignore
+from tensorflow.keras.preprocessing import image # type: ignore
 import cv2
 import numpy as np
 
@@ -10,13 +10,15 @@ classifier =load_model('model.h5')
 
 emotion_labels = ['Angry','Disgust','Fear','Happy','Neutral', 'Sad', 'Surprise']
 
-cap = cv2.VideoCapture(1,cv2.CAP_DSHOW)
+cap = cv2.VideoCapture(0,cv2.CAP_DSHOW)
 if not (cap.isOpened()):
     print("Could not open video device")
 
-
 while True:
-    _, frame = cap.read()
+    ret, frame = cap.read()
+    if not ret or frame is None:
+        print("Failed to capture frame from camera.")
+        continue
     labels = []
     gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
     faces = face_classifier.detectMultiScale(gray)
@@ -25,8 +27,6 @@ while True:
         cv2.rectangle(frame,(x,y),(x+w,y+h),(0,255,255),2)
         roi_gray = gray[y:y+h,x:x+w]
         roi_gray = cv2.resize(roi_gray,(48,48),interpolation=cv2.INTER_AREA)
-
-
 
         if np.sum([roi_gray])!=0:
             roi = roi_gray.astype('float')/255.0
